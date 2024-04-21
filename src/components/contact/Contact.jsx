@@ -18,7 +18,7 @@ const Contact = ({ searchContact, handleClickDelete  }) => {
         </p>
         <button 
         type="button"
-        onClick={() => handleClickDelete (id)}>Delete</button>
+        onClick={() => handleClickDelete(id)}>Delete</button>
     </div>
     </li>
   );
