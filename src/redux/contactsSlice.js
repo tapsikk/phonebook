@@ -25,7 +25,7 @@ export const selectContacts = (state) => state.contacts.items;
 
 export const selectFilteredContacts = createSelector(
   selectContacts,
-  selectFilterName, // Используем селектор selectFilterName из filtersSlice
+  selectFilterName,
   (contacts, nameFilter) => {
     if (!nameFilter) {
       return contacts;
