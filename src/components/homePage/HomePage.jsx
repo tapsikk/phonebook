@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addContact,
-  removeContact,
+  deleteContact,
   selectFilteredContacts,
 } from "../../redux/contactsSlice";
-import { selectFilterName, setNameFilter } from "../../redux/filtersSlice";
+import { selectFilterName, changeFilter } from "../../redux/filtersSlice";
 import ContactForm from "../contactForm/ContactForm";
 import ContactList from "../contactList/ContactList";
 import SearchBox from "../searchBox/SearchBox";
@@ -20,7 +20,7 @@ function HomePage() {
   };
 
   const deleteContacts = (contactId) => {
-    dispatch(removeContact(contactId));
+    dispatch(deleteContact(contactId));
   };
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function HomePage() {
     <>
       <h1>Phonebook</h1>
       <ContactForm addContacts={addContacts} />
-      <SearchBox value={filterName} onFilter={(value) => dispatch(setNameFilter(value))} />
+      <SearchBox value={filterName} onFilter={(value) => dispatch(changeFilter(value))} />
       {filteredContacts.length !== 0 ? (
         <ContactList
           searchContact={filteredContacts} // Передаем filteredContacts вместо searchContact

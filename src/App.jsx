@@ -1,12 +1,14 @@
-import { Provider } from "react-redux";
-import { store } from "./redux/store";
-import HomePage from "./components/homePage/HomePage";
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './redux/store';
+import HomePage from './components/homePage/HomePage';
 
 function App() {
-
   return (
     <Provider store={store}>
-    <HomePage/>
+      <PersistGate loading={null} persistor={persistor}>
+        <HomePage />
+      </PersistGate>
     </Provider>
   );
 }

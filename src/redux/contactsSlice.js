@@ -1,20 +1,19 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
-
+import { selectFilterName } from "./filtersSlice.js";
 
 const getInitialContactsState = () => {
   const savedContacts = window.localStorage.getItem("saved-contacts");
   return savedContacts ? JSON.parse(savedContacts) : [];
 };
 
-
-  const contactsSlice = createSlice({
+const contactsSlice = createSlice({
   name: "contacts",
-  initialState: {items: getInitialContactsState()},
+  initialState: { items: getInitialContactsState() },
   reducers: {
     addContact: (state, action) => {
       state.items.push(action.payload);
     },
-    removeContact: (state, action) => {
+    deleteContact: (state, action) => {
       state.items = state.items.filter(
         (contact) => contact.id !== action.payload
       );
@@ -26,7 +25,7 @@ export const selectContacts = (state) => state.contacts.items;
 
 export const selectFilteredContacts = createSelector(
   selectContacts,
-  (state) => state.filters.name,
+  selectFilterName, // Используем селектор selectFilterName из filtersSlice
   (contacts, nameFilter) => {
     if (!nameFilter) {
       return contacts;
@@ -37,6 +36,6 @@ export const selectFilteredContacts = createSelector(
   }
 );
 
-export const { addContact, removeContact } = contactsSlice.actions;
+export const { addContact, deleteContact } = contactsSlice.actions;
 
 export default contactsSlice;

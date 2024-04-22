@@ -1,33 +1,32 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/contactsSlice";
 import { v4 as uuidv4 } from "uuid";
 import style from "./contactForm.module.scss";
 import * as Yup from "yup";
 
-const TourChema = Yup.object().shape({
+const TourSchema = Yup.object().shape({
   name: Yup.string().trim().min(3).max(50).required(),
   number: Yup.string().trim().min(3).max(50).required(),
 });
 
-const ContactForm = ({ addContacts }) => {
+const ContactForm = () => {
+  const dispatch = useDispatch();
+
   const nameFieldId = uuidv4();
   const phoneFieldId = uuidv4();
   const buttonFieldId = uuidv4();
 
   const handleSubmit = (values, actions) => {
     const { name, number } = values;
-    addContacts({
-      // ...values,
-      id: uuidv4(),
-      name,
-      number,
-    });
+    dispatch(addContact({ id: uuidv4(), name, number }));
     actions.resetForm();
   };
 
   return (
     <Formik
       initialValues={{ name: "", number: "" }}
-      validationSchema={TourChema}
+      validationSchema={TourSchema}
       onSubmit={handleSubmit}
     >
       <Form className={style.form}>
