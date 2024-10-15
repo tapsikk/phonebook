@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contactsSlice";
 import { v4 as uuidv4 } from "uuid";
-import style from "./contactForm.module.scss";
+import style from "./contactForm.module.css";
 import * as Yup from "yup";
 
 const TourSchema = Yup.object().shape({

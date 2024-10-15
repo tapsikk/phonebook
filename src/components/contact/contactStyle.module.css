@@ -1,4 +1,7 @@
 li {
+  display: flex;
+  justify-content: center;
+  width: 200px;
   list-style-type: none;
   border: 2px solid rgb(255, 255, 255);
   padding: 10px;
