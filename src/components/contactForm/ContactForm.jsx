@@ -29,28 +29,43 @@ const ContactForm = () => {
       validationSchema={TourSchema}
       onSubmit={handleSubmit}
     >
-      <Form className={style.form}>
-        <label htmlFor={nameFieldId}>Name</label>
+      {({ errors, touched }) => (
+        <Form className={style.form}>
+          <label htmlFor={nameFieldId}>Name</label>
 
-        <Field type="text" name="name" id={nameFieldId} placeholder="Name..." />
+          <Field
+            type="text"
+            name="name"
+            id={nameFieldId}
+            placeholder="Name..."
+          />
 
-        <ErrorMessage name="name" component={"p"} style={{ color: "red" }} />
+          <ErrorMessage
+            name="name"
+            component={"p"}
+            className={style.errorMessageName}
+          />
 
-        <label htmlFor={phoneFieldId}>Number</label>
+          <label htmlFor={phoneFieldId}>Number</label>
 
-        <Field
-          type="tel"
-          name="number"
-          id={phoneFieldId}
-          placeholder="Number..."
-        />
+          <Field
+            type="tel"
+            name="number"
+            id={phoneFieldId}
+            placeholder="Number..."
+          />
 
-        <ErrorMessage name="number" component={"p"} style={{ color: "red" }} />
+          <ErrorMessage
+            name="number"
+            component={"p"}
+            className={style.errorMessageNumber}
+          />
 
-        <button type="submit" id={buttonFieldId}>
-          Add contact
-        </button>
-      </Form>
+          <button type="submit" id={buttonFieldId}>
+            Add contact
+          </button>
+        </Form>
+      )}
     </Formik>
   );
 };
